@@ -37,20 +37,35 @@ export default function ChangeProfilePicture() {
     }
   }
 
-  const handleFileUpload = () => {
-    try {
-      console.log("uploading...")
-      setLoading(true)
-      const formData = new FormData()
-      formData.append("displayPicture", imageFile)
-      // console.log("formdata", formData)
-      dispatch(updateDisplayPicture(token, formData)).then(() => {
-        setLoading(false)
-      })
-    } catch (error) {
-      console.log("ERROR MESSAGE - ", error.message)
-    }
+  // const handleFileUpload = () => {
+  //   try {
+  //     console.log("uploading...")
+  //     setLoading(true)
+  //     const formData = new FormData()
+  //     formData.append("displayPicture", imageFile)
+  //     // console.log("formdata", formData)
+  //     dispatch(updateDisplayPicture(token, formData)).then(() => {
+  //       setLoading(false)
+  //     })
+  //   } catch (error) {
+  //     console.log("ERROR MESSAGE - ", error.message)
+  //   }
+  // }
+
+  const handleFileUpload = async () => {
+  try {
+    setLoading(true)
+
+    const formData = new FormData()
+    formData.append("displayPicture", imageFile)
+
+    await dispatch(updateDisplayPicture(token, formData))
+  } catch (error) {
+    console.log(error)
+  } finally {
+    setLoading(false)
   }
+}
 
   useEffect(() => {
     if (imageFile) {

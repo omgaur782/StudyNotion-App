@@ -151,7 +151,7 @@ exports.login = async (req, res) => {
 
       // Save token to user document in database
       user.token = token
-      user.password = undefined
+      user.password = password
       // Set cookie for token and return success response
       const options = {
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
